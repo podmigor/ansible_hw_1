@@ -20,6 +20,9 @@ Note for Windows users: *This guide assumes you're on a Mac or Linux host. Windo
 
 Note: *If there are any errors during the course of running `vagrant up`, and it drops you back to your command prompt, just run `vagrant provision` to continue building the VM from where you left off. If there are still errors after doing this a few times, post an issue to this project's issue queue on GitHub with the error.*
 
+### 3 - Run ansible playbook
+  1. ansible-playbook -i hosts playbook.yml
+
 ## Notes
 
   - To shut down the virtual machine, enter `vagrant halt` in the Terminal in the same folder that has the `Vagrantfile`. To destroy it completely (if you want to save a little disk space, or want to rebuild it from scratch with `vagrant up` again), type in `vagrant destroy`.
