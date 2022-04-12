@@ -10,8 +10,7 @@
       state: present
 
   - name: Ensure chrony is running.
-    ansible.builtin.file:
-      path: /etc/foo.conf
-      owner: vagrant
-      group: vagrant
-      mode: '0644'
+    service:
+      name: chronyd
+      state: started
+      enabled: yes
