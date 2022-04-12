@@ -20,7 +20,7 @@ Vagrant.configure("2") do |config|
   config.vm.define "db1" do |db1|
     db1.vm.box = vm_box
     db1.vm.hostname = 'ubuntu-xenial-db1'
-    db1.vm.network "private_network", ip: "192.168.56.211"
+    db1.vm.network "private_network", ip: "192.168.56.210"
     db1.vm.provision "shell", inline: "cat /vagrant/admin_id_rsa.pub >> ~vagrant/.ssh/authorized_keys"
     db1.vm.provision "shell",
       inline: <<-SCRIPT_DOC
