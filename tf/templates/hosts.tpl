@@ -2,4 +2,4 @@
 ${app1_ip}
 
 [app2]
-${app2}
+${app2_ip}

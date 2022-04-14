@@ -19,7 +19,7 @@ This project spins up a GCP VMs and demonstrates a very simple Ansible playbook.
 
 ### 2 - Build the GCP environment by TF
 
-  1. deploy tf code 
+  1. deploy tf code from tf directory
   2. ssh to ansible-runner by using your ssh user and ip from tf outputs
 
 Note: *If there are any errors during the course of running `vagrant up`, and it drops you back to your command prompt, just run `vagrant provision` to continue building the VM from where you left off. If there are still errors after doing this a few times, post an issue to this project's issue queue on GitHub with the error.*

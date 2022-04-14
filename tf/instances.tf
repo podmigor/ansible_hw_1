@@ -97,10 +97,11 @@ resource "google_compute_instance" "ansible-workers" {
   }
 }
 
-resource "local_file" "hosts_cfg" {
+/*resource "local_file" "hosts_cfg" {
+  depends_on = [google_compute_instance.ansible-workers]
   content = templatefile("templates/hosts.tpl", {
-    app1 = google_compute_instance.ansible-workers.0.network_interface.0.network_ip
-    app2 = google_compute_instance.ansible-workers.1.network_interface.0.network_ip
+    app1_ip = google_compute_instance.ansible-workers.0.network_interface.0.network_ip
+    app2_ip = google_compute_instance.ansible-workers.1.network_interface.0.network_ip
   })
-  filename = "./hosts.cfg"
-}
+  filename = "./example_how_to_generate_inventory"
+}*/
