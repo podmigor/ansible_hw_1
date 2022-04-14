@@ -11,6 +11,7 @@ variable "region" {
 }
 
 variable "credentials" {
+  description = "path to your SA json"
 }
 
 variable "subnet_cidr" {
@@ -18,10 +19,11 @@ variable "subnet_cidr" {
 }
 
 variable "user" {
-  default = "ahre"
+  description = "ssh connection user"
 }
 
 variable "ssh_pub_key" {
+  description = "path to your public ssh key"
 }
 
 variable "network_name" {

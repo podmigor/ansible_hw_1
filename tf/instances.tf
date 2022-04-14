@@ -3,6 +3,12 @@ resource "tls_private_key" "test" {
   rsa_bits  = 4096
 }
 
+resource "google_secret_manager_secret" "ssh-key" {
+  secret_id = "ssh-key"
+  replication {
+    automatic = true
+  }
+}
 
 resource "google_compute_address" "static" {
   name = "vm-public-address"
@@ -39,13 +45,14 @@ resource "google_compute_instance" "ansible-runner" {
       private_key = tls_private_key.test.private_key_openssh
     }
     inline = [
-      "sudo apt-get update && sudo apt-get install -y ansible",
-    "sudo chown ${var.user}:${var.user} /tmp/sshkey*"]
+      "sudo apt-get update && sudo apt-get install -y ansible git",
+      "sudo chown ${var.user}:${var.user} /tmp/sshkey*",
+      "git clone https://github.com/ahrechanychenko/ansible_demo.git"]
   }
   metadata = {
       ssh-keys = "${var.user}:${file(var.ssh_pub_key)}\n ${var.user}:${tls_private_key.test.public_key_openssh}"
     }
-  metadata_startup_script = "ssh-keygen -b 2048 -t rsa -f /tmp/sshkey -q -N \"\" && gcloud secrets versions add test-secret --data-file=\"/tmp/sshkey.pub\""
+  metadata_startup_script = "ssh-keygen -b 2048 -t rsa -f /tmp/sshkey -q -N \"\" && gcloud secrets versions add ssh-key --data-file=\"/tmp/sshkey.pub\""
   depends_on   = [
     module.network, tls_private_key.test
   ]
@@ -55,7 +62,7 @@ resource "google_compute_instance" "ansible-runner" {
 }
 
 data "google_secret_manager_secret_version" "public_key" {
-  secret    = "test-secret"
+  secret    = "ssh-key"
   depends_on = [google_compute_instance.ansible-runner]
 }
 

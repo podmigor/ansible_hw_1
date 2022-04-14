@@ -1,16 +1,33 @@
 ---
 - hosts: all
   become: yes
-  remote_user: vagrant
+  remote_user: ahre #replace with yours defined in terraform variable user
 
   tasks:
-  - name: Ensure chrony (for time synchronization) is installed.
-    yum:
+  - name: Ensure ntp (for time synchronization) is installed.
+    apt:
       name: ntp
       state: present
 
-  - name: Ensure chrony is running.
+
+  - name: Ensure ntp is running.
     service:
-      name: chronyd
+      name: ntp
+      state: started
+      enabled: yes
+
+- hosts: web
+  become: yes
+  remote_user: ahre #replace with yours defined in terraform variable user
+
+  tasks:
+  - name: Ensure nginx is installed.
+    apt:
+      name: nginx
+      state: present
+
+  - name: Ensure nginx is running.
+    service:
+      name: nginx
       state: started
       enabled: yes
