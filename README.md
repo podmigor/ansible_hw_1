@@ -13,7 +13,8 @@ This project spins up a GCP VMs and demonstrates a very simple Ansible playbook.
      2. Network Management Admin
      3. Storage Admin
      4. Secret Manager Admin
-  4. Enable `secret manager api` in GCP API management and wait for 5 minutes before run TF code
+  4. Add `Secret Manager Secret Version Manager` role to default compute engine service account
+  5. Enable `secret manager api` in GCP API management and wait for 5 minutes before run TF code
 
 
 
