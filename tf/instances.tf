@@ -19,18 +19,18 @@ resource "google_compute_address" "static" {
 
 resource "google_compute_instance" "ansible-runner" {
   name         = "ansible-runner"
-  machine_type = "f1-micro"
+  machine_type = var.instance_type
   tags         = ["internal-ssh", "external-ssh"]
-  zone = "europe-west2-a"
+  zone = var.zone
 
   boot_disk {
     initialize_params {
-      image = "debian-10-buster-v20220317"
+      image = var.instance_image
     }
   }
   network_interface {
-    network = "ansible"
-    subnetwork = "subnet-01"
+    network = var.network_name
+    subnetwork = var.subnet_name
 
     access_config {
       nat_ip = google_compute_address.static.address
@@ -69,19 +69,19 @@ data "google_secret_manager_secret_version" "public_key" {
 resource "google_compute_instance" "ansible-workers" {
   count = 3
   name         = "ansible-worker-${count.index}"
-  machine_type = "f1-micro"
+  machine_type = var.instance_type
   tags         = ["internal-ssh"]
-  zone = "europe-west2-a"
+  zone = var.zone
   allow_stopping_for_update = true
 
   boot_disk {
     initialize_params {
-      image = "debian-10-buster-v20220317"
+      image = var.instance_image
     }
   }
   network_interface {
-    network = "ansible"
-    subnetwork = "subnet-01"
+    network = var.network_name
+    subnetwork = var.subnet_name
     network_ip = "10.10.10.10${count.index}"
 
   }

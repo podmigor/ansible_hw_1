@@ -1,6 +1,6 @@
 //This will create network and subnet
 module "network" {
-  source  = "terraform-google-modules/network/google"
+  source  = "registry.terraform.io/terraform-google-modules/network/google"
   version = "~> 4.0"
 
   project_id = var.project
@@ -11,9 +11,9 @@ module "network" {
 
   subnets = [
         {
-            subnet_name           = "subnet-01"
+            subnet_name           = var.subnet_name
             subnet_ip             = var.subnet_cidr
-            subnet_region         = "europe-west2"
+            subnet_region         = var.region
         }
     ]
 
