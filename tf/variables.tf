@@ -11,7 +11,7 @@ variable "region" {
 }
 
 variable "credentials" {
-  description = "../../gcp_keys/hillel-project-1-e39e275fb220.json"
+  default = "../../../gcp_keys/hillel-project-1-e39e275fb220.json"
 }
 
 variable "subnet_cidr" {
@@ -19,18 +19,18 @@ variable "subnet_cidr" {
 }
 
 variable "user" {
-  description = "ssh connection user"
+  default = "podmigor"
 }
 
 variable "ssh_pub_key" {
-  description = "path to your public ssh key"
+  default = "~/.ssh/id_rsa.pub"
 }
 
 variable "network_name" {
   default = "ansible"
 }
 
-//+
+//Added vars
 variable "instance_type" {
   description = "Instance type"
   type        = string

@@ -1,7 +1,7 @@
 ---
 - hosts: all
   become: yes
-  remote_user: ahre #replace with yours defined in terraform variable user
+  remote_user: podmigor #replace with yours defined in terraform variable user
 
   tasks:
   - name: Ensure ntp (for time synchronization) is installed.
@@ -18,7 +18,7 @@
 
 - hosts: web
   become: yes
-  remote_user: ahre #replace with yours defined in terraform variable user
+  remote_user: podmigor #replace with yours defined in terraform variable user
 
   tasks:
   - name: Ensure nginx is installed.

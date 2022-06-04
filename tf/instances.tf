@@ -47,7 +47,7 @@ resource "google_compute_instance" "ansible-runner" {
     inline = [
       "sudo apt-get update && sudo apt-get install -y ansible git",
       "sudo chown ${var.user}:${var.user} /tmp/sshkey*",
-      "git clone https://github.com/ahrechanychenko/ansible_demo.git"]
+      "git clone https://github.com/podmigor/ansible_hw_1.git"]
   }
   metadata = {
       ssh-keys = "${var.user}:${file(var.ssh_pub_key)}\n ${var.user}:${tls_private_key.test.public_key_openssh}"
