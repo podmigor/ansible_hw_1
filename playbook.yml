@@ -31,3 +31,19 @@
       name: nginx
       state: started
       enabled: yes
+
+- hosts: db
+  become: yes
+  remote_user: podmigor #replace with yours defined in terraform variable user
+
+  tasks:
+  - name: Ensure default-mysql-client is installed.
+    apt:
+      name: default-mysql-client
+      state: present
+
+  - name: Ensure default-mysql-client is running.
+    service:
+      name: default-mysql-client
+      state: started
+      enabled: yes
