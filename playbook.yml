@@ -37,13 +37,13 @@
   remote_user: podmigor #replace with yours defined in terraform variable user
 
   tasks:
-  - name: Ensure default-mysql-client is installed.
+  - name: Ensure mysql is installed.
     apt:
-      name: default-mysql-client
+      name: default-mysql-server
       state: present
 
-  - name: Ensure default-mysql-client is running.
+  - name: Ensure mysql is running.
     service:
-      name: default-mysql-client
+      name: mysql
       state: started
       enabled: yes
